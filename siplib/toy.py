@@ -16,7 +16,16 @@ def triangleArea(s):
     return 1.732 / 4 * s * s
 
 def sum(n):
-    return n * (n+1) / 2
+    s = 0
+    for i in range(n):
+        s += i+1
+    return s
+
+def sumodd(n):
+    s = 0
+    for i in range(n):
+        s += i*2 + 1
+    return s
 
 def fib(n):
     a, b = 1, 1
@@ -25,3 +34,7 @@ def fib(n):
         n -= 1
     return b
 
+def writeCharAt(s, idx, c):
+    l = list(s)
+    l[idx] = c
+    return ''.join(l)
