@@ -1,12 +1,12 @@
 import random
 
 if __name__ == '__main__':
-    max = 100
-    secret = random.randint(1, max)
+    ub = 100
+    secret = random.randint(1, ub)
     cnt = 0
     while True:
         cnt += 1
-        print("Guess a number in 1 -", max)
+        print("Guess a number in 1 -", ub)
         val = input()
         val = int(val)
 
