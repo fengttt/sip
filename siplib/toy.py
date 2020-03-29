@@ -30,6 +30,13 @@ def sumodd(n):
         s += i*2 + 1
     return s
 
+def sumeven(n):
+    '''Return sum of the first n even numbers'''
+    s = 0
+    for i in range(n):
+        s += i*2
+    return s
+
 def fib(n):
     '''Return n-th fib number.'''
     a, b = 1, 1
