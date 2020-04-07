@@ -11,10 +11,10 @@ BLUE = (0, 0, 255)
 
 # Frame Per Second
 FPS = 60
-fpsClock = pygame.time.Clock()
 
 if __name__ == '__main__':
     pygame.init()
+    fpsClock = pygame.time.Clock()
     surf = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("Hello PyGame")
 
