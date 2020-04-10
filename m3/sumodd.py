@@ -58,7 +58,7 @@ def runOneFrame(surf, state):
     state.draw(surf)
     if n > 0 and n < state.boardSz:
         msg = "Iteration {0}: Adding {1} red squares.".format(n, n*2-1)
-        txtObj = sg.drawText(msg, 32, sg.BLACK, sg.WHITE)
+        txtObj = sg.drawSmallText(msg, sg.BLACK, sg.WHITE)
         txtRect = txtObj.get_rect()
         txtRect.topleft = (10, 610)
         surf.blit(txtObj, txtRect)
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     pygame.init()
     surf = pygame.display.set_mode((600, 800))
     pygame.display.set_caption("Hello PyGame")
-
+    sg.initFc()
     state = initState()    
     while True:
         if state.done:

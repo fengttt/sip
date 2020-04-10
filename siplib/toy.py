@@ -50,3 +50,10 @@ def writeCharAt(s, idx, c):
     l = list(s)
     l[idx] = c
     return ''.join(l)
+
+def flatten(a):
+    ret = []
+    for x in a:
+        ret.extend(x)
+    return ret
+
