@@ -4,7 +4,7 @@ import pygame, pygame.locals, sys, random
 import siplib.sg as sg
 
 
-FPS = 60
+FPS = 2 
 N = 100
 PIXEL = 600
 HEAL_DAYS = 20
@@ -100,28 +100,23 @@ if __name__ == '__main__':
     state.infectSome(N0)
 
     frameCnt = 0
-    oldx = 0
-    inc = 0
     while True:
         for ev in pygame.event.get():
             if ev.type == pygame.locals.QUIT:
                 pygame.quit()
                 sys.exit()
-
-        ts = frameCnt // 10
-
-        if frameCnt % 10 == 0:
-            surf.fill(sg.WHITE)
-            oldx, inc = state.update(ts)
-            state.draw(surf, ts)
-
-            msg = "At tick {0}s, total infected grow from {1} to {2}".format(ts, oldx, oldx + inc) 
-            txtObj = sg.drawSmallText(msg, sg.BLACK, sg.WHITE)
-            txtRect = txtObj.get_rect()
-            txtRect.topleft = (10, 10 + PIXEL)
-            surf.blit(txtObj, txtRect)
- 
         frameCnt += 1
+        ts = frameCnt
+
+        surf.fill(sg.WHITE)
+        oldx, inc = state.update(ts)
+        state.draw(surf, ts)
+
+        msg = "At tick {0}s, total infected grow from {1} to {2}".format(ts, oldx, oldx + inc) 
+        txtObj = sg.drawSmallText(msg, sg.BLACK, sg.WHITE)
+        txtRect = txtObj.get_rect()
+        txtRect.topleft = (10, 10 + PIXEL)
+        surf.blit(txtObj, txtRect)
         pygame.display.update()
         fpsClock.tick(FPS)
         
