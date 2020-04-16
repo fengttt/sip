@@ -15,7 +15,49 @@ if __name__ == '__main__':
     sg.initFc()
     
     frameCnt = 0
+    mouseMsg = ""
+    kbdMsg = ""
+    
     while True:
+        for ev in pygame.event.get():
+            if ev.type == pygame.locals.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif ev.type == pygame.MOUSEBUTTONUP:
+                mx, my = pygame.mouse.get_pos()
+                btn = ""
+                if ev.button == 1:
+                    btn = "LEFT"
+                elif ev.button == 2:
+                    btn = "MIDDLE"
+                elif ev.button == 3:
+                    btn = "RIGHT"
+                else:
+                    btn = "SOME"
+                mouseMsg = "{0} button is clicked.  Position ({1}, {2})".format(
+                    btn, mx, my)
+            elif ev.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                ks = ""
+                if keys[pygame.locals.K_UP]:
+                    ks = ks + "UP "
+                
+                if keys[pygame.locals.K_DOWN]:
+                    ks = ks + "DOWN "
+                    
+                if keys[pygame.locals.K_LEFT]:
+                    ks = ks + "LEFT "
+                
+                if keys[pygame.locals.K_RIGHT]:
+                    ks = ks + " RIGHT "
+                    
+                if keys[pygame.locals.K_RETURN]:
+                    ks = ks + "RETURN "
+                    
+                if ks == "":
+                    ks = "SOME KEY "
+                kbdMsg = ks + "is/are pressed."
+                
         surf.fill(sg.WHITE)
         magicColor = (frameCnt % 256, 255 - frameCnt % 256, 0)
         pygame.draw.circle(surf, magicColor, (400, 300), 50)
@@ -38,14 +80,20 @@ if __name__ == '__main__':
 
         frameCnt += 1
         msg = "Hello world.  Time: {0}s.  Frame Count {1}".format(frameCnt//FPS, frameCnt)
-        txtObj = sg.drawSmallText(msg, sg.BLACK, sg.WHITE)
+        txtObj = sg.drawBigText(msg, sg.BLACK, sg.WHITE)
         txtRect = txtObj.get_rect()
         txtRect.topleft = (10, 610)
         surf.blit(txtObj, txtRect)
-    
-        for ev in pygame.event.get():
-            if ev.type == pygame.locals.QUIT:
-                pygame.quit()
-                sys.exit()
+        
+        mouseObj = sg.drawMidText(mouseMsg, sg.BLACK, sg.WHITE)
+        mouseRect = mouseObj.get_rect()
+        mouseRect.topleft = (10, 700)
+        surf.blit(mouseObj, mouseRect)
+        
+        kbdObj = sg.drawMidText(kbdMsg, sg.BLACK, sg.WHITE)
+        kbdRect = kbdObj.get_rect()
+        kbdRect.topleft = (10, 750)
+        surf.blit(kbdObj, kbdRect)
+            
         pygame.display.update()
         fpsClock.tick(FPS)        
