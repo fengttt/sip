@@ -57,3 +57,12 @@ def flatten(a):
         ret.extend(x)
     return ret
 
+
+def x8(a):
+    ret = []
+    for x in a:
+        for y in range(8):
+            tmp = list(x)
+            tmp.append(y)
+            ret.append(tuple(tmp)) 
+    return ret
