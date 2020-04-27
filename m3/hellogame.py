@@ -36,6 +36,12 @@ if __name__ == '__main__':
                     btn = "SOME"
                 mouseMsg = "{0} button is clicked.  Position ({1}, {2})".format(
                     btn, mx, my)
+
+                keys = pygame.key.get_pressed()
+                if keys[pygame.locals.K_LSHIFT]:
+                    mouseMsg = mouseMsg + " LEFT_SHIFT "
+                if keys[pygame.locals.K_SPACE]:
+                    mouseMsg = mouseMsg + " SPACE "
             elif ev.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 ks = ""
