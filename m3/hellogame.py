@@ -87,9 +87,7 @@ if __name__ == '__main__':
         frameCnt += 1
         msg = "Hello world.  Time: {0}s.  Frame Count {1}".format(frameCnt//FPS, frameCnt)
         txtObj = sg.drawBigText(msg, sg.BLACK, sg.WHITE)
-        txtRect = txtObj.get_rect()
-        txtRect.topleft = (10, 610)
-        surf.blit(txtObj, txtRect)
+        surf.blit(txtObj, (10, 610))
         
         mouseObj = sg.drawMidText(mouseMsg, sg.BLACK, sg.WHITE)
         mouseRect = mouseObj.get_rect()
