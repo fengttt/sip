@@ -1,9 +1,8 @@
 def subsetSum(A, n, s, mem):
-    if s <= 0:
+    if s == 0:
+        return True 
+    if n < 0 or s < 0:
         return False
-
-    if n == 0:
-        return A[0] == s
 
     k = (n, s)
     if k in mem:
@@ -20,5 +19,9 @@ if __name__ == '__main__':
         print("Can partition = ", subsetSum(A, len(A) - 1, s//2, {}))
     else:
         print("Sum is odd")
+
+    A = [7, 3, 2, 5, 8]
+    sum = 14
+    print ("subset = ", subsetSum(A, len(A)-1, 14, {}))
 
 
