@@ -39,7 +39,7 @@ def partition(a, lo, hi):
 
     exch(a, lo, j)
     return j
-           
+
 def qsort(a, lo, hi):
     if lo >= hi:
         return
@@ -47,15 +47,66 @@ def qsort(a, lo, hi):
     qsort(a, lo, j-1)
     qsort(a, j+1, hi)
 
+def qsort2(a, lo, hi):
+    if lo >= hi:
+        return
+
+    i = lo - 1
+    j = hi
+    v = a[hi]
+
+    while True:
+        while True:
+            i = i+1
+            if a[i] >= v:
+                break
+        while True:
+            j = j-1
+            if a[j] <= v or j == lo:
+                break
+        if i >= j:
+            break
+        exch(a, i, j)
+    exch(a, i, hi)
+    qsort2(a, lo, i-1)
+    qsort2(a, i+1, hi)
+
+def merge(a, b):
+    i = 0
+    j = 0
+    ret = []
+
+    while True:
+        if i == len(a):
+            ret.extend(b[j:])
+            return ret
+        elif j == len(b):
+            ret.extend(a[i:])
+            return ret
+        elif a[i] < b[j]:
+            ret.append(a[i])
+            i += 1
+        else:
+            ret.append(b[j])
+            j += 1
+def msort(a): 
+    if len(a) <= 1:
+        return a.copy()
+
+    mid = len(a) // 2
+
+    b1 = msort(a[:mid])
+    b2 = msort(a[mid:])
+    return merge(b1, b2)
+
 if __name__ == '__main__':
     x = [random.randint(1, 100) for i in range(100)]
     ans = sorted(x)
     y = [i for i in x]
-    qsortkr(y, 0, len(y))
+    qsort(y, 0, len(y) - 1)
     z = [i for i in x]
-    qsort(z, 0, len(z) - 1) 
+    qsort2(z, 0, len(z) - 1)
 
-    print (z)
     print (y == ans)
     print (z == ans)
 
