@@ -42,8 +42,23 @@ def bfs(g, s, t):
                     return topath(seen, ret)
         prev = nlv
 
+
+def dfs(g, s, t): 
+    seen = {s: None}
+    stack = [s] 
+    while len(stack) > 0:
+        n = stack.pop()
+        for nn in g[n]:
+            if nn not in seen:
+                seen[nn] = n
+                if nn == t:
+                    return topath(seen, [t])
+                stack.append(nn)
+    return None
+
 if __name__ == '__main__':
     g = buildGraph(5)
     print(g['black'])
 
-
+    print("BFS: ", bfs(g, 'black', 'white'))
+    print("DFS: ", dfs(g, 'black', 'white')) 
