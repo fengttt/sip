@@ -7,23 +7,24 @@ def replace(s, n, z):
 
 def buildGraph(n):
     g = {}
-    wn = [w for w in words.words() if len(w) == n]
+    wn = [w for w in words.words() if len(w) == n and w.lower() == w]
     wn = set(wn)
     for a in wn:
         g[a] = []
     for a in wn:
         for i in range(n):
-            for z in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ':
+            for z in 'abcdefghijklmnopqrstuvwxyz':
                 b = replace(a, i, z)
-                if b in wn:
+                if b != a and b in wn:
                     g[a].append(b)
     return g
 
 def topath(seen, path):
-    if seen[path[-1]] == None:
-        return path
-    path.append(seen[path[-1]])
-    return topath(seen, path)
+    while True:
+        if seen[path[-1]] == None:
+            return path
+        path.append(seen[path[-1]])
+    return path
 
 def bfs(g, s, t):
     ret = [t]
