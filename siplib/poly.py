@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 def factor2(n):
     if n == 1:
         return [(1, 1)]
@@ -16,10 +19,8 @@ class Poly(object):
         self.normalize()
 
     def normalize(self):
-        print("A = ", self.a)
         while self.a[-1] == 0 and len(self.a) > 1:
             self.a.pop()
-            print("Pop : ", self.a)
 
     def termstr(self, ai, i):
         if i == 0:
@@ -41,8 +42,23 @@ class Poly(object):
     def __str__(self):
         return "".join([self.termstr(self.a[i], i) for i in range(len(self.a))])
 
+    def __call__(self, x):
+        ret = 0
+        xnth = 1
+        for i in range(len(self.a)):
+            ret += self.a[i] * xnth
+            xnth *= x
+        return ret
+
+    def plot(self, lo, hi):
+        xs = np.linspace(lo, hi, 200)
+        ys = [self.__call__(x) for x in xs]
+        plt.plot(xs, ys)
+        plt.show()
+        
 
 if __name__ == '__main__':
+
     p1 = Poly([1, 2, 3])
     p2 = Poly([-1, 6, -7, 0, -8, 9, -2])
     p3 = Poly([0, -1, 6, -7, 0, -8, 9, -2])
@@ -50,12 +66,12 @@ if __name__ == '__main__':
     p5 = Poly([5])
     p6 = Poly([1, 3, 5, 0, 0])
 
-    print("p1 =", p1)
+    print("p1 =", p1, "p1(2) = ", p1(2))
     print("p2 =", p2)
     print("p3 =", p3)
     print("p4 =", p4)
     print("p5 =", p5)
     print("p6 =", p6)
 
-    for i in range(1, 20):
-        print("f2", i, "=", factor2(i)) 
+    p1.plot(-10, 10)
+    p2.plot(-1, 1)
