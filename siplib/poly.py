@@ -50,10 +50,10 @@ class Poly(object):
             xnth *= x
         return ret
     
-    def __plus__(self, other):
+    def __add__(self, other):
         ''' self + other '''
         
-    def __minus__(self, other):
+    def __sub__(self, other):
         ''' self - other '''
 
     def __mul__(self, other):
