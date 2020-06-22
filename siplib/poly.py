@@ -49,13 +49,29 @@ class Poly(object):
             ret += self.a[i] * xnth
             xnth *= x
         return ret
+    
+    def __plus__(self, other):
+        ''' self + other '''
+        
+    def __minus__(self, other):
+        ''' self - other '''
 
+    def __mul__(self, other):
+        ''' self * other '''
+
+    def factor(self):
+        ''' for poly of order 2 or 3, return factors '''
+        
+    def order(self):
+        ''' a0 + a1 x + a2 x^2 ... an x^n return return n'''
+        return len(self.a)
+    
     def plot(self, lo, hi):
+        ''' plot the curv, with x range from lo to hi'''
         xs = np.linspace(lo, hi, 200)
         ys = [self.__call__(x) for x in xs]
         plt.plot(xs, ys)
         plt.show()
-        
 
 if __name__ == '__main__':
 
