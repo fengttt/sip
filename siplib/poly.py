@@ -71,7 +71,10 @@ class Poly(object):
         xs = np.linspace(lo, hi, 200)
         ys = [self.__call__(x) for x in xs]
         plt.plot(xs, ys)
-        plt.show()
+
+    def plotDot(self, x, y):
+        plt.plot(x, y, 'ro')
+
 
 if __name__ == '__main__':
 
@@ -90,4 +93,9 @@ if __name__ == '__main__':
     print("p6 =", p6)
 
     p1.plot(-10, 10)
+    p1.plotDot(0, 0)
+    p1.plotDot(1, 1)
+    plt.show()
+
     p2.plot(-1, 1)
+    plt.show()
