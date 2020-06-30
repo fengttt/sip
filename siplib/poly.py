@@ -50,21 +50,41 @@ class Poly(object):
             xnth *= x
         return ret
     
+    def timesTerm(self, a_n, n):
+        ''' return a_n x^n * self '''
+        # the order of result should be n + order of self
+        ret = [0 for i in range(n + len(self.a))]
+        for i in range(len(self.a)):
+            ret[i+n] = self.a[i] * a_n
+        return Poly(ret)
+        
     def __add__(self, other):
         ''' self + other '''
+        n = max(len(self.a), len(other.a))
+        ret = [0 for i in range(n)]
+        for i in range(len(self.a)):
+            ret[i] += self.a[i]
+        for i in range(len(other.a)):
+            ret[i] += other.a[i]
+        return Poly(ret)
         
     def __sub__(self, other):
         ''' self - other '''
+        return self + other.timesTerm(-1, 0)
 
     def __mul__(self, other):
         ''' self * other '''
+        ret = Poly([0])
+        for i in range(len(other.a)):
+            ret = ret + self.timesTerm(other.a[i], i)
+        return ret
 
     def factor(self):
         ''' for poly of order 2 or 3, return factors '''
         
     def order(self):
         ''' a0 + a1 x + a2 x^2 ... an x^n return return n'''
-        return len(self.a)
+        return len(self.a) - 1
     
     def plot(self, lo, hi):
         ''' plot the curv, with x range from lo to hi'''
@@ -74,7 +94,6 @@ class Poly(object):
 
     def plotDot(self, x, y):
         plt.plot(x, y, 'ro')
-
 
 if __name__ == '__main__':
 
